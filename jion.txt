@@ -1,0 +1,18 @@
+1. Write a query to find the addresses (location_id, street_address, city, state_province, country_name) of all the departments.
+select first_name as 'First Name', last_name as 'Last Name' from employees
+2. Write a query to find the name (first_name, last name), department ID and department name of all the employees.
+select e.first_name, e.last_name, e.department_id, d.department_name from employees e join departments d
+3. Write a query to find the name (first_name, last_name), job_title, department ID and department name of the employees who work in London.
+select e.first_name, e.last_name,j.job_title, e.department_id, d.department_name from ((employees e join departments d on e.department_id = d.department_id) join jobs j on e.job_id = j.job_id) join locations l where l.city = 'London'
+4. Write a query to find the employee id, name (last_name) along with their manager (manager_id, last_name).
+select first_name, last_name, manager_id from employees
+5. Write a query to find the name (first_name, last_name) and hire date of the employees who were hired after 'Jones'.
+SELECT e.first_name, e.last_name, e.hire_date FROM employees e JOIN employees davies ON (davies.last_name = 'Jones') WHERE davies.hire_date < e.hire_date;
+6. Write a query to find the employee ID, job title, number of days between ending date and starting date for all jobs in department having id 90.
+select e.employee_id , j.job_title, q.end_date-q.start_date from (job_history q join employees e on e.job_id = q.job_id ) join jobs j on j.job_id = q.job_id where q.department_id = 90
+7. Write a query to display the department name, manager name, and city.
+select d.department_name, d.manager_id, l.city from departments d join locations l on d.location_id = l.location_id
+8. Write a query to display job title, employee (id, name), and the difference between the salary of the employee and minimum salary for the job.
+select j.job_title , e.employee_id, e.first_name, j.max_salary - j.min_salary as 'dif' from employees e join jobs j on e.job_id = j.job_id
+9. Write a query to display the job history that was done by any employee who is currently drawing more than 10000 of salary.
+select j.* from job_history j join employees e on j.employee_id = e.employee_id where e.salary > 10000
